@@ -78,6 +78,40 @@ class list{
         tail = temp;
         tail->next = NULL;
     }
+    void insert_position(int val, int pos) 
+    {
+      if(pos==0)
+        {
+            push_front(val);
+            return;
+        }
+        if(pos<0)
+        {
+            cout<<"Invalid position"<<endl;
+            return;
+        }
+        Node* temp=head;
+        for(int i=0;i<pos-1;i++)
+        {
+            temp= temp->next;
+        }
+        Node* newNode = new Node(val);
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+
+    void search(int val) 
+    {
+        Node* temp = head;
+        while (temp != NULL) {
+            if (temp->data == val) {
+                cout << "Value " << val << " found in the list." << endl;
+                return;
+            }
+            temp = temp->next;
+        }
+        cout << "Value " << val << " not found in the list." << endl;
+    }
 };
 
 
@@ -93,6 +127,15 @@ int main()
     ll.push_back(50);
 
     ll.printll(); // Output: 30->20->10->
+
+    ll.pop_front();
+    ll.printll();
+
+    ll.pop_back();
+    ll.printll();
+
+    ll.insert_position(35, 2);
+    ll.printll();
    return 0;
    
     
