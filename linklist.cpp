@@ -15,6 +15,7 @@ public:
 class list{
     Node* head;
     Node* tail;
+    public:
     list() 
     {
         head = NULL;
@@ -32,12 +33,67 @@ class list{
         }
        
     }
+    void printll() 
+    {
+        Node* temp = head;
+        while (temp != NULL) {
+            cout << temp->data << "->";
+            temp = temp->next;
+        }
+        cout << "NULL" << endl;
+    }
+    void push_back(int val) 
+    {
+        Node* newNode = new Node(val);
+        if (tail == NULL) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+    void pop_front() 
+    {
+        if (head == NULL) return; // List is empty
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        if (head == NULL) tail = NULL; // If the list becomes empty
+    }
+    void pop_back() 
+    {
+        if (head == NULL) return; // List is empty
+        if (head == tail) { // Only one element
+            delete head;
+            head = NULL;
+            tail = NULL;
+            return;
+        }
+        Node* temp = head;
+        while (temp->next != tail) {
+            temp = temp->next;
+        }
+        delete tail;
+        tail = temp;
+        tail->next = NULL;
+    }
 };
 
 
 
 int main()
 {
+   list ll;
+
+   ll.push_front(10);
+    ll.push_front(20);
+    ll.push_front(30);
+    ll.push_back(40);
+    ll.push_back(50);
+
+    ll.printll(); // Output: 30->20->10->
+   return 0;
    
     
 }
